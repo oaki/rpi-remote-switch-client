@@ -1,4 +1,4 @@
-declare var rpio: SocketIOClientStatic;
+declare var rpio: RPIOStatic;
 
 declare module 'rpio' {
     export = rpio;
@@ -129,6 +129,146 @@ interface RPIOStatic {
      * @param pin
      */
     close(pin: number);
+
+    // I²C
+
+    /**
+     * Assign pins 3 and 5 to i²c use. Until .i2cEnd() is called they won't be available for GPIO use.
+     *
+     * The pin assignments are:
+     * Pin 3: SDA (Serial Data)
+     * Pin 5: SCL (Serial Clock)
+     */
+    i2cBegin();
+
+    /**
+     * Configure the slave address. This is between 0 - 0x7f, and it can be helpful to
+     * run the i2cdetect program to figure out where your devices are if you are unsure.
+     * @param address
+     */
+    i2cSetSlaveAddress(address: number);
+
+    /**
+     * Set the baud rate - directly set the speed in hertz.
+     * @param baudRate
+     */
+    i2cSetBaudRate(baudRate: number);
+
+    /**
+     * Set the baud rate - based on a divisor of the base 250MHz rate.
+     * @param clockDivider
+     */
+    i2cSetClockDivider(clockDivider: number);
+
+    /**
+     * Turn off the i²c interface and return the pins to GPIO.
+     */
+    i2cEnd();
+
+    // PWM
+
+    /**
+     * Set the PWM refresh rate.
+     * @param clockDivider: power-of-two divisor of the base 19.2MHz rate, with a maximum value of 4096 (4.6875kHz).
+     */
+    pwmSetClockDivider(clockDivider: number);
+
+    /**
+     * Set the PWM range for a pin. This determines the maximum pulse width.
+     * @param pin
+     * @param range
+     */
+    pwmSetRange(pin: number, range: number);
+
+    /**
+     * Set the PWM width for a pin.
+     * @param pin
+     * @param data
+     */
+    pwmSetData(pin: number, data: number);
+
+    // SPI
+
+    /**
+     * Switch pins 119, 21, 23, 24 and 25 (GPIO7-GPIO11) to SPI mode
+     *
+     *  Pin | Function
+     * -----|----------
+     *   19 |   MOSI
+     *   21 |   MISO
+     *   23 |   SCLK
+     *   24 |   CE0
+     *   25 |   CE1
+     */
+    spiBegin();
+
+    /**
+     * Choose which of the chip select / chip enable pins to control.
+     *
+     *  Value | Pin
+     *  ------|---------------------
+     *    0   | SPI_CE0 (24 / GPIO8)
+     *    1   | SPI_CE1 (25 / GPIO7)
+     *    2   | Both
+     *
+     * @param chip
+     */
+    spiChipSelect(cePin: number);
+
+    /**
+     * Commonly chip enable (CE) pins are active low, and this is the default.
+     * If your device's CE pin is active high, use spiSetCSPolarity() to change the polarity.
+     * @param cePin
+     * @param polarity
+     */
+    spiSetCSPolarity(cePin: number, polarity: number);
+
+    /**
+     * Set the SPI clock speed with.
+     * @param clockDivider: an even divisor of the base 250MHz rate ranging between 0 and 65536.
+     */
+    spiSetClockDivider(clockDivider: number);
+
+    /**
+     * Transfer data. Data is sent and received in 8-bit chunks via buffers which should be the same size.
+     * @param txBuffer
+     * @param rxBuffer
+     * @param txLength
+     */
+    spiTransfer(txBuffer: Buffer, rxBuffer: Buffer, txLength: number)
+
+    /**
+     * Send data and do not care about the data coming back.
+     * @param txBuffer
+     * @param txLength
+     */
+    spiWrite(txBuffer: Buffer, txLength: number);
+
+    /**
+     * Release the pins back to general purpose use.
+     */
+    spiEnd();
+
+    // Misc
+
+    /**
+     * Sleep for n seconds.
+     * @param n: number of seconds to sleep
+     */
+    sleep(n: number);
+
+    /**
+     * Sleep for n milliseconds.
+     * @param n: number of milliseconds to sleep
+     */
+    msleep(n: number);
+
+    /**
+     * Sleep for n microseconds.
+     * @param n: number of microseconds to sleep
+     */
+    usleep(n: number);
+
 
     // Constants:
 
