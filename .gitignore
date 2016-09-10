@@ -41,3 +41,6 @@ jspm_packages
 
 # All JavaScript files
 *.js
+
+# Configration
+/config/*.json

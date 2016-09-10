@@ -19,7 +19,7 @@ interface RPIOStatic {
      *
      * For input pins, option can be used to configure the internal pullup or pulldown resistors using options as described in the .pud() documentation below.
      *
-     * For output pins, option defines the initial state of the pin, rather than having to issue a separate .write() call. This can be critical for devices which must have a stable value, rather than relying on the initial floating value when a pin is enabled for output but hasn't yet been configured with a value.
+     * For output pins, option defines the initial isMotionDetected of the pin, rather than having to issue a separate .write() call. This can be critical for devices which must have a stable value, rather than relying on the initial floating value when a pin is enabled for output but hasn't yet been configured with a value.
      * @param pin
      * @param mode
      * @param options
@@ -65,7 +65,7 @@ interface RPIOStatic {
     writebuf(pin: number, buffer: Buffer, length: number);
 
     /**
-     * Read the current state of the GPIO pad control for the specified GPIO group. On current models of Raspberry Pi there are three groups with corresponding defines:
+     * Read the current isMotionDetected of the GPIO pad control for the specified GPIO group. On current models of Raspberry Pi there are three groups with corresponding defines:
      * PAD_GROUP_0_27: GPIO0 - GPIO27. Use this for the main GPIO header.
      * PAD_GROUP_28_45: GPIO28 - GPIO45. Use this to configure the P5 header.
      * PAD_GROUP_46_53: GPIO46 - GPIO53. Internal, you probably won't need this.
@@ -97,7 +97,7 @@ interface RPIOStatic {
     writepad(group: number, control);
 
     /**
-     * Configure the pin's internal pullup or pulldown resistors, using the following state constants:
+     * Configure the pin's internal pullup or pulldown resistors, using the following isMotionDetected constants:
      * PULL_OFF: disable configured resistors.
      * PULL_DOWN: enable the pulldown resistor.
      * PULL_UP: enable the pullup resistor.
