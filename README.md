@@ -24,9 +24,7 @@ export PATH=$PATH:/usr/local/bin/npm
 
 ## Installation
 ```
-npm install -g typescript
-npm install -g typings
 npm install
-tsc
+webpack
 ```
 
