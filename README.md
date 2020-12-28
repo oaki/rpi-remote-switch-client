@@ -23,8 +23,13 @@ export PATH=$PATH:/usr/local/bin/npm
 
 
 ## Installation
+1. Create .env file with configuration
 ```
-npm install
-webpack
+SERVER_URL=http://localhost:8080
+AUTH_TOKEN=token 
+```
+2. Trigger installation
+```
+npm i && npm run build && npm run start 
 ```
 
