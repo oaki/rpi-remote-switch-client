@@ -1,9 +1,0 @@
-{
-  "name": "rpi-remote-switch-client",
-  "dependencies": {},
-  "globalDependencies": {
-    "node": "registry:dt/node#6.0.0+20160831021119",
-    "rpio": "registry:dt/rpio#0.0.0+20160914114152",
-    "socket.io-client": "registry:dt/socket.io-client#1.4.4+20160317120654"
-  }
-}
