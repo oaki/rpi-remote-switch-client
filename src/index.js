@@ -16,7 +16,7 @@ const socket = io(config.server.url, {
   reconnectionAttempts: 99999
 });
 
-const ripSensorPin = 10;
+const ripSensorPin = 19;
 
 socket.on("connect", () => {
   console.log("Connected");
